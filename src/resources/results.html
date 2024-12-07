@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Incident Data Visualizations</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header">
+            <h1 class="text-center">Incident Data Visualizations</h1>
+        </div>
+        <div class="card-body">
+            <div>
+                <h2 class="text-center">Bar Chart of Nature vs Frequency</h2>
+                <div class="">
+                    {{ bar_chart|safe }}
+                </div>
+            </div>
+            {% for time_series_chart in time_series_charts %}
+            <div class="mt-4">
+                <h2 class="text-center">Time Series Line Graph</h2>
+                <div class="">
+                    {{ time_series_chart|safe }}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="mt-4">
+                <h2 class="text-center">Clustering of Incidents Based on Location and Nature</h2>
+                {% if cluster_chart %}
+                    <div class="">
+                        {{ cluster_chart|safe }}
+                    </div>
+                {% else %}
+                    <p class="text-center">No clustering data available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

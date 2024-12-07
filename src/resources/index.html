@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Norman PD Incident PDF</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function addURLField() {
+            var container = document.getElementById("urlFields");
+            var input = document.createElement("input");
+            input.type = "text";
+            input.className = "form-control my-2";
+            input.name = "urls";
+            input.placeholder = "Enter URL of PDF...";
+            container.appendChild(input);
+        }
+
+        function addFileField() {
+            var container = document.getElementById("fileFields");
+            var input = document.createElement("input");
+            input.type = "file";
+            input.className = "form-control my-2";
+            input.name = "files";
+            container.appendChild(input);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h1 class="text-center">Upload Norman PD Incident PDF</h1>
+            </div>
+            <div class="card-body">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            {{ messages[0] }}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <form action="/" method="post" enctype="multipart/form-data">
+                    <div id="urlFields" class="form-group">
+                        <label for="urls">Enter URLs of PDF:</label>
+                        <input type="text" class="form-control my-2" name="urls" placeholder="Enter URL of PDF...">
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-block" onclick="addURLField()">Add Another URL</button>
+                    <hr>
+                    <div id="fileFields" class="form-group">
+                        <label for="files">Or upload PDF files:</label>
+                        <input type="file" class="form-control my-2" name="files">
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-block" onclick="addFileField()">Upload Another File</button>
+                    <hr>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
