@@ -66,7 +66,7 @@ Press CTRL+C to quit
 
 - **`results()`**: 
    - **HTTP Methods**: GET
-   - **Description**:  Generates visualizations for the incidents, including bar charts, time series graphs, and clustering visualizations.
+   - **Description**:  Generates visualizations for the incidents, including bar charts, time series graphs, and clustering visualizations (K means and DBScan).
 
 - **`main()`**: 
    - **Description**: Runs the Flask application in debug mode. 
@@ -107,9 +107,13 @@ The tests for each function are located in the `tests/` folder, and they can be 
 4. **Data Visualization**:
     - **Bar Chart**: Creates a bar chart showing the frequency of different incident natures.
     - **Time Series Graphs**: Generates individual time series graphs for each uploaded/fetched PDF, displaying incident counts over time.
-    - **Clustering Visualization**: 
+    - **KMeans Clustering Visualization**: 
         - Performs KMeans clustering on the geocoded incident locations.
         - Generates a scatter plot showing clusters of incidents based on location and nature, with hover tools to display the nature and time of each incident.
+      - **DBScan Visualization**:
+         - Performs DBSCAN clustering on the incident nature and time.
+      - Encodes the nature of incidents into numeric values for clustering. Groups incidents by date and clusters them based on incident nature (encoded) and hour of the day.
+      - Ensures that each group has enough samples for clustering. Generates a scatter plot for each date showing clusters of incidents based on the encoded nature and time, with hover tools displaying the incident nature and time details.
 
 5. **Result Display**:
     - Combines all visualizations—bar charts, time series graphs, and clustering plots.
