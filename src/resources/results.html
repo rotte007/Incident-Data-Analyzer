@@ -37,6 +37,14 @@
                     <p class="text-center">No clustering data available.</p>
                 {% endif %}
             </div>
+            {% for nature_time_cluster in nature_time_clusters %}
+            <div class="mt-4">
+                <h2 class="text-center">Clustering of Incidents Based on Nature and Time</h2>
+                <div class="">
+                    {{ nature_time_cluster|safe }}
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
