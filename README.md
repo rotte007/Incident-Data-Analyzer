@@ -27,7 +27,7 @@ Open your web browser and navigate to:
 http://127.0.0.1:5000/
 ```
 
-![video](https://youtu.be/PpSxm5dL6NI)
+![Demonstration Video](https://youtu.be/PpSxm5dL6NI)
 
 ## Example of Output
 
