@@ -87,8 +87,6 @@ The tests for each function are located in the `tests/` folder, and they can be 
 - **`test_combined_data_visualization`**:
    - **Description**: Tests combined data visualization for multiple files and URLs.
 
-## Approach
-
 ## Approach:
 1. **Data Ingestion**:
     - **File Upload**: Users can upload multiple PDF files through the web interface.
