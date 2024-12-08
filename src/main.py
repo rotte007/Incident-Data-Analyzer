@@ -8,6 +8,9 @@ import plotly.io as pio
 from sklearn.cluster import KMeans
 from pypdf import PdfReader
 import googlemaps
+from sklearn.cluster import DBSCAN
+from sklearn.preprocessing import LabelEncoder
+import plotly.express as px
 
 app = Flask(__name__, template_folder='resources', static_folder='static')
 app.secret_key = 'supersecretkey'
@@ -155,7 +158,40 @@ def results():
     else:
         cluster_chart = None
 
-    return render_template('results.html', bar_chart=bar_chart, time_series_charts=time_series_charts, cluster_chart=cluster_chart)
+    # Visualization 4: Clustering Based on Nature and Time
+    nature_time_clusters = []
+    if 'nature' in cleaned_df.columns and 'incident_time' in cleaned_df.columns:
+        cleaned_df['Hour'] = cleaned_df['incident_time'].dt.hour
+
+        # Encode Nature as numeric values for clustering
+        le = LabelEncoder()
+        cleaned_df['nature_encoded'] = le.fit_transform(cleaned_df['nature'])
+
+        grouped = cleaned_df.groupby(cleaned_df['incident_time'].dt.date)
+        for date, group in grouped:
+            if len(group) >= 5:  # Ensure enough samples for clustering
+                dbscan = DBSCAN(eps=1, min_samples=5)
+                group['Cluster'] = dbscan.fit_predict(group[['nature_encoded', 'Hour']])
+
+                cluster_fig = px.scatter(
+                    group,
+                    x='Hour',
+                    y='nature_encoded',
+                    color='Cluster',
+                    hover_data=['nature', 'incident_time'],
+                    labels={'Hour': 'Hour of Day', 'nature_encoded': 'Incident Type (Encoded)'},
+                    title=f"DBSCAN Clustering of Incidents for {date}",
+                    category_orders={'Cluster': group['Cluster'].unique()}
+                )
+                nature_time_clusters.append(cluster_fig.to_html(full_html=False, include_plotlyjs='cdn'))
+
+    return render_template(
+        'results.html',
+        bar_chart=bar_chart,
+        time_series_charts=time_series_charts,
+        cluster_chart=cluster_chart,
+        nature_time_clusters=nature_time_clusters
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)
