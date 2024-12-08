@@ -27,7 +27,7 @@ Open your web browser and navigate to:
 http://127.0.0.1:5000/
 ```
 
-![video](https://github.com/rotte007/cis6930fa24-project3/blob/main/Video.mp4)
+![video](https://youtu.be/PpSxm5dL6NI)
 
 ## Example of Output
 
