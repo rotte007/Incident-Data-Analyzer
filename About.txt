@@ -1,0 +1,29 @@
+Web Development:
+Uses Flask for routing, templating, and handling HTTP requests.
+
+Data Processing:
+Uses pandas for dataframes, cleaning, and manipulation.
+
+PDF Parsing:
+Uses pypdf to extract structured data from unstructured PDF text.
+
+Visualization:
+Generates interactive charts with Plotly.
+
+Machine Learning:
+Applies KMeans and DBSCAN clustering from scikit-learn.
+
+API Integration:
+Uses Google Maps API for geocoding.
+
+Testing:
+Implements automated tests with unittest.
+
+Packaging & Dependency Management:
+Uses setup.py, setup.cfg, and Pipfile.
+
+CI/CD:
+Integrates with GitHub Actions for automated testing.
+
+Error Handling & User Feedback:
+Handles errors gracefully and provides user feedback via Flask flash messages.
